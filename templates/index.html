@@ -51,10 +51,16 @@
         <form method="POST" action="{{ url_for('analyze_mail') }}">
             <div class="form-group">
                 <label for="mail">Enter your mail context:</label>
-                <textarea class="form-control" id="mail" name="mail" rows="3"></textarea>
+                <textarea class="form-control" id="mail" name="mail" rows="3">{% if mail is defined %}{{ mail }}{% endif %}</textarea>
             </div>
             <button type="submit" class="btn btn-primary">Analyze</button>
         </form>
+
+        {% if error is defined %}
+            <div class="mt-4">
+                <div class="alert alert-warning" role="alert">{{ error }}</div>
+            </div>
+        {% endif %}
 
         {% if classify is defined %}
             <div class="mt-4">

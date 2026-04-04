@@ -13,14 +13,15 @@ def predict_mail(input_text):
     input_data_features = feature_extraction.transform(input_user_mail)
     prediction = model.predict(input_data_features)
     return prediction
-
-
+    
 @app.route('/', methods=['GET', 'POST'])
 def analyze_mail():
     if request.method == 'POST':
-        mail = request.form.get('mail')
+        mail = request.form.get('mail', '').strip()
+        if not mail:
+            return render_template('index.html', error="Please enter email content to analyze.")
         predicted_mail = predict_mail(input_text=mail)
-        return render_template('index.html', classify=predicted_mail)
+        return render_template('index.html', classify=predicted_mail, mail=mail)
 
     return render_template('index.html')
 
