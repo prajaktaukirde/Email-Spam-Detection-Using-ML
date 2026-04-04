@@ -1,78 +1,254 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Email Spam Message Classification Using Python & Machine Learning</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Spam Detector | ML Powered</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #f8f9fa; /* Set your desired background color */
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .container {
-            margin-top: 50px;
+        .main-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
-        h1 {
-            color: #007bff; /* Set your desired heading color */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: none;
+            max-width: 700px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #5a4a42;
+            padding: 30px;
+            text-align: center;
+            border: none;
+        }
+
+        .card-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .card-header p {
+            opacity: 0.9;
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .card-body {
+            padding: 40px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
         }
 
         .form-control {
-            background-color: #ffffff; /* Set your desired textarea background color */
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            resize: none;
         }
 
-        .btn-primary {
-            background-color: #007bff; /* Set your desired button background color */
-            border-color: #007bff;
+        .form-control:focus {
+            border-color: #fcb69f;
+            box-shadow: 0 0 0 0.2rem rgba(252, 182, 159, 0.25);
         }
 
-        .btn-primary:hover {
-            background-color: #0069d9; /* Set your desired button hover background color */
-            border-color: #0062cc;
+        .btn-analyze {
+            background: linear-gradient(135deg, #a8e6cf 0%, #88d8b0 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d5a4a;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .alert-success {
-            background-color: #d4edda; /* Set your desired success alert background color */
-            color: #155724; /* Set your desired success alert text color */
-            border-color: #c3e6cb;
+        .btn-analyze:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(168, 230, 207, 0.5);
         }
 
-        .alert-danger {
-            background-color: #f8d7da; /* Set your desired danger alert background color */
-            color: #721c24; /* Set your desired danger alert text color */
-            border-color: #f5c6cb;
+        .result-container {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-spam {
+            background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+            color: #8b4444;
+        }
+
+        .result-ham {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+            color: #2d5a3d;
+        }
+
+        .result-warning {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            color: #8b6914;
+        }
+
+        .result-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .result-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .result-subtext {
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .feature {
+            text-align: center;
+            color: #666;
+        }
+
+        .feature i {
+            font-size: 1.5rem;
+            color: #88d8b0;
+            margin-bottom: 8px;
+        }
+
+        .feature span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 576px) {
+            .card-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .card-body {
+                padding: 25px;
+            }
+            
+            .features {
+                flex-direction: column;
+                gap: 15px;
+            }
         }
     </style>
-
+</head>
 <body>
-    <div class="container mt-5">
-        <h1 class="mb-4">Email Spam Message Classifier</h1>
-        <form method="POST" action="{{ url_for('analyze_mail') }}">
-            <div class="form-group">
-                <label for="mail">Enter your mail context:</label>
-                <textarea class="form-control" id="mail" name="mail" rows="3">{% if mail is defined %}{{ mail }}{% endif %}</textarea>
+    <div class="main-container">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-shield-alt fa-3x mb-3"></i>
+                <h1>Email Spam Detector</h1>
+                <p>Powered by Machine Learning</p>
             </div>
-            <button type="submit" class="btn btn-primary">Analyze</button>
-        </form>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('analyze_mail') }}">
+                    <div class="mb-3">
+                        <label for="mail" class="form-label">
+                            <i class="fas fa-envelope me-2"></i>Enter Email Content
+                        </label>
+                        <textarea class="form-control" id="mail" name="mail" rows="5" placeholder="Paste your email content here to check if it's spam or not...">{% if mail is defined %}{{ mail }}{% endif %}</textarea>
+                    </div>
+                    <button type="submit" class="btn-analyze">
+                        <i class="fas fa-search me-2"></i>Analyze Email
+                    </button>
+                </form>
 
-        {% if error is defined %}
-            <div class="mt-4">
-                <div class="alert alert-warning" role="alert">{{ error }}</div>
-            </div>
-        {% endif %}
-
-        {% if classify is defined %}
-            <div class="mt-4">
-                {% if classify == 0 %}
-                    <div class="alert alert-danger" role="alert">This is a spam mail</div>
-                {% elif classify == 1 %}
-                    <div class="alert alert-success" role="alert">This is a ham mail</div>
+                {% if error is defined %}
+                    <div class="result-container result-warning">
+                        <i class="fas fa-exclamation-triangle result-icon"></i>
+                        <p class="result-text">Oops!</p>
+                        <p class="result-subtext">{{ error }}</p>
+                    </div>
                 {% endif %}
+
+                {% if classify is defined %}
+                    <div class="result-container {% if classify == 0 %}result-spam{% else %}result-ham{% endif %}">
+                        {% if classify == 0 %}
+                            <i class="fas fa-exclamation-circle result-icon"></i>
+                            <p class="result-text">Spam Detected!</p>
+                            <p class="result-subtext">This email appears to be spam. Be cautious!</p>
+                        {% else %}
+                            <i class="fas fa-check-circle result-icon"></i>
+                            <p class="result-text">Clean Email</p>
+                            <p class="result-subtext">This email appears to be safe (ham).</p>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                <div class="features">
+                    <div class="feature">
+                        <i class="fas fa-brain"></i>
+                        <span>ML Powered</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-bolt"></i>
+                        <span>Instant Results</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-lock"></i>
+                        <span>Secure</span>
+                    </div>
+                </div>
             </div>
-        {% endif %}
+        </div>
     </div>
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
