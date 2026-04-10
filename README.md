@@ -11,7 +11,7 @@ A web application that uses Machine Learning to classify emails as spam or ham (
 - **Bootstrap 5** - CSS framework for responsive design
 - **Font Awesome** - Icons for the user interface
 
-## Project Structure
+## Project Structure+
 
 ```
 .

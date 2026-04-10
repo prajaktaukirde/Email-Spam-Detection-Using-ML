@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Detection Hub | Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .main-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: none;
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #5a4a42;
+            padding: 40px;
+            text-align: center;
+            border: none;
+        }
+
+        .card-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .card-header p {
+            opacity: 0.9;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .card-body {
+            padding: 50px 40px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .option-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .option-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+            color: #333;
+        }
+
+        .option-card.email:hover {
+            border-color: #88d8b0;
+        }
+
+        .option-card.news:hover {
+            border-color: #74b9ff;
+        }
+
+        .option-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2.5rem;
+        }
+
+        .option-card.email .option-icon {
+            background: linear-gradient(135deg, #a8e6cf 0%, #88d8b0 100%);
+            color: #2d5a4a;
+        }
+
+        .option-card.news .option-icon {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+        }
+
+        .option-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .option-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .option-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .option-card.email .option-btn {
+            background: linear-gradient(135deg, #a8e6cf 0%, #88d8b0 100%);
+            color: #2d5a4a;
+        }
+
+        .option-card.news .option-btn {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+        }
+
+        .option-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .feature {
+            text-align: center;
+            color: #666;
+        }
+
+        .feature i {
+            font-size: 1.5rem;
+            color: #fcb69f;
+            margin-bottom: 8px;
+        }
+
+        .feature span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 576px) {
+            .card-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .card-body {
+                padding: 30px 20px;
+            }
+            
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .features {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-robot fa-3x mb-3"></i>
+                <h1>AI Detection Hub</h1>
+                <p>Choose a detection tool powered by Machine Learning</p>
+            </div>
+            <div class="card-body">
+                <div class="options-container">
+                    <!-- Email Spam Detection Option -->
+                    <a href="{{ url_for('email_detection') }}" class="option-card email">
+                        <div class="option-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="option-title">Email Spam Detection</h3>
+                        <p class="option-description">
+                            Analyze emails to detect spam messages using advanced machine learning algorithms. Protect your inbox from unwanted messages.
+                        </p>
+                        <span class="option-btn">
+                            <i class="fas fa-arrow-right me-2"></i>Detect Spam
+                        </span>
+                    </a>
+
+                    <!-- Fake News Detection Option -->
+                    <a href="{{ url_for('news_detection') }}" class="option-card news">
+                        <div class="option-icon">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <h3 class="option-title">Fake News Detection</h3>
+                        <p class="option-description">
+                            Verify news articles and identify misinformation using NLP techniques. Ensure the information you read is authentic.
+                        </p>
+                        <span class="option-btn">
+                            <i class="fas fa-arrow-right me-2"></i>Verify News
+                        </span>
+                    </a>
+                </div>
+
+                <div class="features">
+                    <div class="feature">
+                        <i class="fas fa-brain"></i>
+                        <span>AI Powered</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-bolt"></i>
+                        <span>Real-time Analysis</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Reliable Results</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
