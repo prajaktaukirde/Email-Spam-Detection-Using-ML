@@ -19,6 +19,7 @@ phishing_model = None
 try:
     import joblib
     phishing_model = joblib.load('phishing_model.pkl')
+    print("Phishing model loaded")
 except:
     print("Phishing model not found - using rule-based detection")
 
@@ -47,11 +48,8 @@ def predict_news(input_text):
     return prediction
 
 def predict_phishing_url(url):
-    """Predict if URL is phishing using the trained model or rule-based fallback"""
+    """Predict if URL is phishing using rule-based detection"""
     try:
-        # If model is available, use it (would need feature extraction matching training)
-        # For now, use enhanced rule-based detection
-        
         phishing_score = 0
         url_lower = url.lower()
         
@@ -75,11 +73,11 @@ def predict_phishing_url(url):
             if tld in url_lower:
                 phishing_score += 2
         
-        # Check for character substitution (e.g., paypa1, amaz0n, faceb00k)
+        # Check for character substitution
         if any(sub in url for sub in ['0', '1']):
             phishing_score += 2
         
-        # Check URL length (phishing URLs often very long)
+        # Check URL length
         if len(url) > 75:
             phishing_score += 1
         
@@ -87,7 +85,7 @@ def predict_phishing_url(url):
         if url.count('.') > 3:
             phishing_score += 1
         
-        # Check for @ symbol (used to trick users)
+        # Check for @ symbol
         if '@' in url:
             phishing_score += 3
         

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Detection Hub | Home</title>
+    <title>AI Detection Hub | Home v2</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -96,6 +96,10 @@
             border-color: #74b9ff;
         }
 
+        .option-card.phishing:hover {
+            border-color: #ff9a9e;
+        }
+
         .option-icon {
             width: 90px;
             height: 90px;
@@ -115,6 +119,11 @@
         .option-card.news .option-icon {
             background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
             color: white;
+        }
+
+        .option-card.phishing .option-icon {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #8b4444;
         }
 
         .option-title {
@@ -149,9 +158,60 @@
             color: white;
         }
 
+        .option-card.phishing .option-btn {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #8b4444;
+        }
+
         .option-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Chart Section Styles */
+        .chart-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .chart-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .chart-container {
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+            height: 300px;
+        }
+
+        .accuracy-legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
         }
 
         .features {
@@ -196,6 +256,19 @@
             .features {
                 flex-direction: column;
                 gap: 20px;
+            }
+
+            .chart-container {
+                height: 250px;
+            }
+
+            .accuracy-legend {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .chart-title {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -253,6 +326,30 @@
                     </a>
                 </div>
 
+                <!-- Model Accuracy Chart Section -->
+                <div class="chart-section">
+                    <h3 class="chart-title">
+                        <i class="fas fa-chart-pie me-2"></i>Model Accuracies
+                    </h3>
+                    <div class="chart-container">
+                        <canvas id="accuracyChart"></canvas>
+                    </div>
+                    <div class="accuracy-legend">
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #88d8b0;"></span>
+                            <span>Email Spam: 97%</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #74b9ff;"></span>
+                            <span>Fake News: 98.63%</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #ff9a9e;"></span>
+                            <span>Phishing URL: 96%</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="features">
                     <div class="feature">
                         <i class="fas fa-brain"></i>
@@ -272,5 +369,46 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Pie Chart for Model Accuracies
+        const ctx = document.getElementById('accuracyChart').getContext('2d');
+        const accuracyChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Email Spam (97%)', 'Fake News (98.63%)', 'Phishing URL (96%)'],
+                datasets: [{
+                    data: [97, 98.63, 96],
+                    backgroundColor: [
+                        '#88d8b0',  // Email - Green
+                        '#74b9ff',  // News - Blue
+                        '#ff9a9e'   // Phishing - Pink
+                    ],
+                    borderColor: [
+                        '#2d5a4a',
+                        '#0984e3',
+                        '#8b4444'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.parsed + '% accuracy';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>

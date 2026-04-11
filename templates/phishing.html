@@ -10,7 +10,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
@@ -35,7 +35,7 @@
 
         .card-header {
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-            color: white;
+            color: #8b4444;
             padding: 30px;
             text-align: center;
             border: none;
@@ -65,7 +65,7 @@
             padding: 15px 40px;
             font-size: 1.1rem;
             font-weight: 600;
-            color: white;
+            color: #8b4444;
             width: 100%;
             margin-top: 20px;
             transition: all 0.3s ease;
@@ -127,7 +127,7 @@
                 </a>
                 <i class="fas fa-shield-alt fa-3x mb-3"></i>
                 <h1>Phishing URL Detector</h1>
-                <p>Check if a URL is safe or a phishing scam</p>
+                <p>Check if a URL is safe or phishing</p>
             </div>
             <div class="card-body">
                 <form method="POST" action="{{ url_for('phishing_detection') }}">
@@ -136,8 +136,7 @@
                             <i class="fas fa-link me-2"></i>Enter URL
                         </label>
                         <input type="text" class="form-control" id="url" name="url" 
-                               placeholder="https://example.com or http://suspicious-site.com"
-                               value="{% if url is defined %}{{ url }}{% endif %}">
+                               placeholder="https://example.com" value="{% if url is defined %}{{ url }}{% endif %}">
                     </div>
                     <button type="submit" class="btn-analyze">
                         <i class="fas fa-search me-2"></i>Analyze URL
@@ -156,12 +155,12 @@
                     <div class="result-container {% if prediction == 'phishing' %}result-phishing{% else %}result-safe{% endif %}">
                         {% if prediction == 'phishing' %}
                             <i class="fas fa-exclamation-triangle result-icon"></i>
-                            <p class="result-text">Phishing URL Detected!</p>
-                            <p class="result-subtext">This URL appears to be malicious or a phishing scam.</p>
+                            <p class="result-text">Phishing Detected!</p>
+                            <p class="result-subtext">This URL appears to be malicious.</p>
                         {% else %}
                             <i class="fas fa-check-circle result-icon"></i>
                             <p class="result-text">Safe URL</p>
-                            <p class="result-subtext">This URL appears to be legitimate and safe.</p>
+                            <p class="result-subtext">This URL appears to be legitimate.</p>
                         {% endif %}
 
                         {% if confidence is defined %}
@@ -174,16 +173,16 @@
 
                 <div class="features">
                     <div class="feature">
-                        <i class="fas fa-lock"></i>
-                        <span>HTTPS Check</span>
+                        <i class="fas fa-shield-alt"></i>
+                        <span>URL Analysis</span>
                     </div>
                     <div class="feature">
                         <i class="fas fa-bolt"></i>
-                        <span>Instant Analysis</span>
+                        <span>Real-time Check</span>
                     </div>
                     <div class="feature">
-                        <i class="fas fa-shield-alt"></i>
-                        <span>Pattern Detection</span>
+                        <i class="fas fa-lock"></i>
+                        <span>Security First</span>
                     </div>
                 </div>
             </div>

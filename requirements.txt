@@ -1,0 +1,23 @@
+# AI Detection Hub - Python Dependencies
+# NOTE: Requires Python 3.10 or 3.11 for TensorFlow compatibility
+# Python 3.14 is NOT supported by TensorFlow
+
+# Web Framework
+flask==3.0.3
+
+# Machine Learning - Core
+scikit-learn==1.5.2
+numpy==1.26.4
+pandas==2.2.2
+
+# Deep Learning (Requires Python ≤3.11)
+tensorflow==2.17.0
+
+# Text Processing
+nltk==3.9.1
+
+# Model Persistence
+joblib==1.4.2
+
+# Utilities
+requests==2.32.3
