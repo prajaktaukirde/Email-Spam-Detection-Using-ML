@@ -25,24 +25,40 @@ A web application with three Machine Learning detection systems: Email Spam Dete
 
 ```
 .
-├── app.py                                    # Flask application
-├── templates/
+├── app.py                                    # Flask application main file
+├── templates/                                # HTML templates
 │   ├── home.html                            # Home page with pie chart
-│   ├── index.html                           # Email spam detection
-│   ├── news.html                            # Fake news detection
-│   └── phishing.html                        # Phishing URL detection
-├── notebooks/
+│   ├── index.html                           # Email spam detection UI
+│   ├── news.html                            # Fake news detection UI
+│   └── phishing.html                        # Phishing URL detection UI
+├── static/                                   # Static assets (CSS, JS, images)
+│
+├── Jupyter Notebooks (Model Training)
 │   ├── Email_Spam_Message_Classification_Using_Machine_Learning.ipynb
 │   ├── News_Detectio.ipynb
 │   └── URLdetection.ipynb
-├── models/
-│   ├── logistic_regression.pkl              # Email model
-│   ├── feature_extraction.pkl               # Email vectorizer
-│   ├── fake_news_model.pkl                  # News model
-│   ├── news_vectorizer.pkl                  # News vectorizer
-│   └── phishing_model.pkl                   # Phishing model
-├── requirements.txt                         # Dependencies
-└── README.md                                # This file
+│
+├── Models (Trained ML Models)
+│   ├── logistic_regression.pkl              # Email spam model (58.8 KB)
+│   ├── feature_extraction.pkl               # Email TF-IDF vectorizer (205 KB)
+│   ├── fake_news_model.pkl                  # Fake news model (39.8 KB)
+│   ├── news_vectorizer.pkl                  # News TF-IDF vectorizer (160 KB)
+│   ├── phishing_model.pkl                   # Phishing URL model (7.1 MB)
+│   ├── model.h5                             # LSTM plagiarism model (80 MB) ⚠️
+│   └── tokenizer.pkl                        # LSTM tokenizer (2.7 MB)
+│
+├── Datasets
+│   ├── mail_data.csv                        # Email dataset (474 KB)
+│   ├── True.csv                             # Real news dataset (52 MB) ⚠️
+│   ├── Fake.csv                             # Fake news dataset (61 MB) ⚠️
+│   ├── PhiUSIIL_Phishing_URL_Dataset.csv    # Phishing URLs (55 MB) ⚠️
+│   ├── data.csv                             # Plagiarism data (31 MB) ⚠️
+│   └── train_snli.txt                       # SNLI training data (37 MB) ⚠️
+│
+├── requirements.txt                         # Python dependencies
+└── README.md                                # Project documentation
+
+⚠️ = Large files not in GitHub (see "Large Files" section below)
 ```
 
 ## How to Run
