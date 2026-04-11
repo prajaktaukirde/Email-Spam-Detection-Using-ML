@@ -1,38 +1,58 @@
-# Email Spam Detection Using Machine Learning
+# AI Detection Hub
 
-A web application that uses Machine Learning to classify emails as spam or ham (not spam). Built with Python, Flask, and scikit-learn.
+A web application with three Machine Learning detection systems: Email Spam Detection, Fake News Detection, and Phishing URL Detection. Built with Python, Flask, and scikit-learn.
+
+## Features
+
+| Feature | Model | Accuracy |
+|---------|-------|----------|
+| Email Spam Detection | Logistic Regression + TF-IDF | 97% |
+| Fake News Detection | Logistic Regression + TF-IDF | 98.63% |
+| Phishing URL Detection | Random Forest | 96% |
 
 ## Tech Stack
 
-- **Python** - Programming language
-- **Flask** - Web framework for building the application
-- **scikit-learn** - Machine learning library for model training and prediction
-- **HTML/CSS** - Frontend styling and structure
-- **Bootstrap 5** - CSS framework for responsive design
-- **Font Awesome** - Icons for the user interface
+- **Python 3.11** - Programming language
+- **Flask** - Web framework
+- **scikit-learn** - Machine learning library
+- **pandas** - Data manipulation
+- **numpy** - Numerical operations
+- **Bootstrap 5** - CSS framework
+- **Chart.js** - Data visualization
+- **Font Awesome** - Icons
 
-## Project Structure+
+## Project Structure
 
 ```
 .
-├── app.py                                    # Flask application main file
+├── app.py                                    # Flask application
 ├── templates/
-│   └── index.html                           # Web interface template
-├── Email_Spam_Message_Classification_Using_Machine_Learning.ipynb  # Jupyter notebook with model training
-├── mail_data.csv                            # Dataset for training
-├── logistic_regression.pkl                  # Trained ML model
-├── feature_extraction.pkl                   # TF-IDF vectorizer
-└── README.md                                # Project documentation
+│   ├── home.html                            # Home page with pie chart
+│   ├── index.html                           # Email spam detection
+│   ├── news.html                            # Fake news detection
+│   └── phishing.html                        # Phishing URL detection
+├── notebooks/
+│   ├── Email_Spam_Message_Classification_Using_Machine_Learning.ipynb
+│   ├── News_Detectio.ipynb
+│   └── URLdetection.ipynb
+├── models/
+│   ├── logistic_regression.pkl              # Email model
+│   ├── feature_extraction.pkl               # Email vectorizer
+│   ├── fake_news_model.pkl                  # News model
+│   ├── news_vectorizer.pkl                  # News vectorizer
+│   └── phishing_model.pkl                   # Phishing model
+├── requirements.txt                         # Dependencies
+└── README.md                                # This file
 ```
 
 ## How to Run
 
 ### Prerequisites
 
-- Python 3.7 or higher installed on your system
-- pip (Python package installer)
+- Python 3.11 (required for TensorFlow compatibility)
+- pip package manager
 
-### Installation Steps
+### Installation
 
 1. **Clone the repository**
    ```bash
@@ -40,26 +60,35 @@ A web application that uses Machine Learning to classify emails as spam or ham (
    cd Email-Spam-Detection-Using-ML
    ```
 
-2. **Install required dependencies**
+2. **Install dependencies**
    ```bash
-   pip install flask scikit-learn
+   pip install -r requirements.txt
    ```
 
-3. **Run the Flask application**
+3. **Run the application**
    ```bash
    python app.py
    ```
 
 4. **Open in browser**
    
-   Navigate to `http://127.0.0.1:5000` in your web browser.
-
+   Navigate to `http://127.0.0.1:5000`
 
 ## Model Details
 
-The machine learning model was trained using:
+### Email Spam Detection
 - **Algorithm**: Logistic Regression
-- **Feature Extraction**: TF-IDF (Term Frequency-Inverse Document Frequency)
-- **Dataset**: SMS Spam Collection Dataset
+- **Features**: TF-IDF Vectorization
+- **Dataset**: SMS Spam Collection (~5,500 emails)
+
+### Fake News Detection
+- **Algorithm**: Logistic Regression
+- **Features**: TF-IDF with text cleaning
+- **Dataset**: True.csv + Fake.csv (~44,800 articles)
+
+### Phishing URL Detection
+- **Algorithm**: Random Forest (100 estimators)
+- **Features**: URL structure analysis (40+ features)
+- **Dataset**: PhiUSIIL Phishing URL Dataset (~100,000 URLs)
 
 
