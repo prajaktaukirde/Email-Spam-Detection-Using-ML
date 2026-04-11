@@ -91,4 +91,32 @@ A web application with three Machine Learning detection systems: Email Spam Dete
 - **Features**: URL structure analysis (40+ features)
 - **Dataset**: PhiUSIIL Phishing URL Dataset (~100,000 URLs)
 
+## Large Files (Not in GitHub)
+
+The following files are too large for GitHub (>100MB limit). Download them separately:
+
+| File | Size | Purpose | Download Link |
+|------|------|---------|---------------|
+| `PhiUSIIL_Phishing_URL_Dataset.csv` | ~55 MB | Phishing training data | [Kaggle Dataset](https://www.kaggle.com/datasets) |
+| `data.csv` | ~31 MB | Plagiarism dataset | Generate from notebook |
+| `model.h5` | ~80 MB | LSTM plagiarism model | Train using `News_Detectio.ipynb` |
+| `train_snli.txt` | ~37 MB | SNLI training data | [SNLI Corpus](https://nlp.stanford.edu/projects/snli/) |
+
+### How to Get These Files
+
+**Option 1: Download from Sources**
+1. **Phishing Dataset**: Download from Kaggle or UCI ML Repository
+2. **SNLI Data**: Download from Stanford NLP website
+3. **Models**: Train using provided Jupyter notebooks
+
+**Option 2: Train Your Own Models**
+```bash
+# Run the notebooks to generate models
+jupyter notebook News_Detectio.ipynb
+jupyter notebook URLdetection.ipynb
+```
+
+**Option 3: Contact Repository Owner**
+Email: [prajaktaukirde576@gmail.com] for direct file access
+
 
